@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sorteador de Números</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Space+Grotesk:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div class="stage">
+
+    <main class="ticket" aria-label="Sorteador de números">
+
+      <!-- ===== Canhoto do ticket: configurações ===== -->
+      <section class="stub">
+        <p class="stub-title">Sorteador</p>
+
+        <label class="field">
+          <span>Número mínimo</span>
+          <input type="number" id="min-value" value="1" inputmode="numeric">
+        </label>
+
+        <label class="field">
+          <span>Número máximo</span>
+          <input type="number" id="max-value" value="60" inputmode="numeric">
+        </label>
+
+        <label class="field checkbox">
+          <input type="checkbox" id="no-repeat">
+          <span>Não repetir números já sorteados</span>
+        </label>
+
+        <p class="stub-note">Sorteios realizados: <span id="draw-count">0</span></p>
+      </section>
+
+      <div class="perforation" aria-hidden="true"></div>
+
+      <!-- ===== Corpo do ticket: resultado ===== -->
+      <section class="draw-area">
+        <p class="draw-label">Número sorteado</p>
+        <div class="number-display" id="result">--</div>
+
+        <button onclick="generateNumber()" class="stamp-button" id="draw-button" type="button">
+          <span>Sortear</span>
+        </button>
+
+        <!-- O histórico de números será preenchido via JavaScript -->
+        <ul class="history" id="history-list"></ul>
+      </section>
+
+    </main>
+
+    <p class="hint">Estrutura pronta para você programar a lógica em JavaScript — veja os comentários no &lt;script&gt; abaixo.</p>
+
+  </div>
+
+<script src="scripts.js">
+  /* =====================================================================
+     ESTRUTURA JAVASCRIPT — para você estudar e implementar a lógica
+     =====================================================================
+
+     Elementos já disponíveis no HTML (referencie por id):
+
+       #min-value    -> input number, valor mínimo do sorteio
+       #max-value    -> input number, valor máximo do sorteio
+       #no-repeat    -> checkbox, se marcado não repete números já sorteados
+       #draw-button  -> botão que dispara o sorteio
+       #result       -> div onde o número sorteado deve ser exibido
+       #history-list -> <ul> onde cada número sorteado pode virar um <li>
+       #draw-count   -> <span> com o total de sorteios já feitos
+
+     Sugestão de passo a passo:
+
+     1. Capture os elementos com document.getElementById(...)
+
+     2. Crie um array (ex: let sorteados = []) para guardar os números
+        já sorteados nesta sessão, usado para a opção "não repetir".
+
+     3. Adicione um listener de clique no #draw-button:
+          drawButton.addEventListener('click', sortear);
+
+     4. Dentro da função sortear():
+          - leia min e max dos inputs (Number(minInput.value), etc)
+          - valide: min deve ser menor que max
+          - se "não repetir" estiver marcado e todos os números do
+            intervalo já tiverem sido sorteados, avise o usuário
+          - gere um número aleatório inteiro entre min e max, ex:
+              Math.floor(Math.random() * (max - min + 1)) + min
+          - se precisar evitar repetição, gere novamente até achar
+            um número que não esteja no array `sorteados`
+          - mostre o número em #result (result.textContent = numero)
+          - adicione a classe 'is-live' no #result por um instante
+            para o efeito de destaque (setTimeout para remover depois)
+          - adicione o número ao array `sorteados`
+          - crie um <li> novo, coloque o número dentro e adicione
+            no #history-list
+          - atualize o #draw-count com sorteados.length
+
+     5. (Opcional, para praticar mais) ideias de próximos passos:
+          - botão para reiniciar o sorteio (limpar histórico)
+          - salvar o histórico no localStorage para persistir
+          - animação de "rolagem" de números antes de mostrar o final
+          - impedir min/max inválidos (min > max, campos vazios)
+  ===================================================================== */
+
+</script>
+
+</body>
+</html>

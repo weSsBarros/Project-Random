@@ -1,0 +1,274 @@
+
+
+  /* ===== Tokens ===== */
+  :root {
+    --ink: #1B2140;
+    --ink-soft: #3A4066;
+    --paper: #F1ECDF;
+    --paper-dark: #E4DCC8;
+    --gold: #E3A72E;
+    --stamp: #C7402B;
+    --teal: #2F6E62;
+    --line: rgba(27, 33, 64, 0.18);
+
+    --font-display: "Fraunces", serif;
+    --font-body: "Space Grotesk", sans-serif;
+    --font-mono: "IBM Plex Mono", monospace;
+
+    --radius: 18px;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+  }
+
+  body {
+    background: var(--paper);
+    background-image:
+      radial-gradient(circle at 15% 20%, rgba(27,33,64,0.05) 0, transparent 40%),
+      radial-gradient(circle at 85% 80%, rgba(199,64,43,0.06) 0, transparent 45%);
+    color: var(--ink);
+    font-family: var(--font-body);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 16px;
+  }
+
+  .stage {
+    width: 100%;
+    max-width: 760px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+
+  /* ===== Ticket ===== */
+  .ticket {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    background: #fffdf7;
+    border-radius: var(--radius);
+    box-shadow: 0 30px 60px -25px rgba(27, 33, 64, 0.35);
+    position: relative;
+    overflow: visible;
+  }
+
+  .stub {
+    padding: 34px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    border-radius: var(--radius) 0 0 var(--radius);
+  }
+
+  .stub-title {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin: 0;
+  }
+
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+  }
+
+  .field input[type="number"] {
+    font-family: var(--font-mono);
+    font-size: 1.1rem;
+    color: var(--ink);
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 10px 12px;
+    width: 100%;
+  }
+
+  .field input[type="number"]:focus-visible,
+  .stamp-button:focus-visible,
+  .field.checkbox input:focus-visible {
+    outline: 3px solid var(--teal);
+    outline-offset: 2px;
+  }
+
+  .field.checkbox {
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.8rem;
+    margin-top: 4px;
+  }
+
+  .field.checkbox input {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--teal);
+  }
+
+  .stub-note {
+    margin-top: auto;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--ink-soft);
+    border-top: 1px dashed var(--line);
+    padding-top: 12px;
+  }
+
+  /* ===== Perforation (linha de rasgo do ticket) ===== */
+  .perforation {
+    position: relative;
+    border-left: 2px dashed var(--line);
+    margin: 18px 0;
+  }
+
+  .perforation::before,
+  .perforation::after {
+    content: "";
+    position: absolute;
+    left: -11px;
+    width: 22px;
+    height: 22px;
+    background: var(--paper);
+    border-radius: 50%;
+  }
+
+  .perforation::before { top: -18px; }
+  .perforation::after { bottom: -18px; }
+
+  /* ===== Draw area ===== */
+  .draw-area {
+    padding: 34px 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 14px;
+    border-radius: 0 var(--radius) var(--radius) 0;
+  }
+
+  .draw-label {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin: 0;
+  }
+
+  .number-display {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(4rem, 12vw, 6rem);
+    line-height: 1;
+    color: var(--ink);
+    min-height: 1.1em;
+  }
+
+  .number-display.is-live {
+    color: var(--stamp);
+  }
+
+  .stamp-button {
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #fff8ec;
+    background: var(--stamp);
+    border: 3px solid #fff8ec;
+    outline: 3px solid var(--stamp);
+    outline-offset: -3px;
+    border-radius: 50%;
+    width: 116px;
+    height: 116px;
+    cursor: pointer;
+    transform: rotate(-6deg);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    box-shadow: 0 10px 20px -8px rgba(199, 64, 43, 0.55);
+  }
+
+  .stamp-button:hover {
+    transform: rotate(-2deg) scale(1.04);
+  }
+
+  .stamp-button:active {
+    transform: rotate(-2deg) scale(0.97);
+  }
+
+  .history {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    padding: 0;
+    margin: 6px 0 0;
+    min-height: 30px;
+  }
+
+  .history li {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 4px 12px;
+    color: var(--ink-soft);
+  }
+
+  .hint {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--ink-soft);
+    text-align: center;
+    max-width: 480px;
+  }
+
+  /* ===== Responsivo ===== */
+  @media (max-width: 620px) {
+    .ticket {
+      grid-template-columns: 1fr;
+    }
+    .perforation {
+      border-left: none;
+      border-top: 2px dashed var(--line);
+      margin: 0 18px;
+    }
+    .perforation::before,
+    .perforation::after {
+      left: auto;
+      top: -11px;
+    }
+    .perforation::before { left: -18px; }
+    .perforation::after { left: auto; right: -18px; }
+    .stub {
+      border-radius: var(--radius) var(--radius) 0 0;
+    }
+    .draw-area {
+      border-radius: 0 0 var(--radius) var(--radius);
+    }
+  }
+
+  /* Respeita usuários que preferem menos movimento */
+  @media (prefers-reduced-motion: reduce) {
+    .stamp-button { transition: none; }
+  }
+
